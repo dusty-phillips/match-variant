@@ -1,0 +1,18 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "match-variant"
+version = "2022.10.0a1"
+authors = [{name = "Brett Cannon", email = "brett@python.org"}, {name = "Dusty Phillips", email="dusty@phillips.codes"}]
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+classifiers = ["License :: OSI Approved :: MIT License"]
+dynamic = ["description"]
+
+[project.urls]
+Home = "https://github.com/dusty-phillips/match-variant"
+
+[project.optional-dependencies]
+test = ["pytest"]
