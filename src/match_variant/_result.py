@@ -1,10 +1,10 @@
 from __future__ import annotations
+
 from contextlib import contextmanager
-from typing import Generic, TypeVar, Union, final
+from typing import Callable, Generic, TypeVar, Union, final
 
-from .variant import Variant
-from .maybe import Maybe
-
+from ._maybe import Maybe
+from ._variant import Variant
 
 T = TypeVar("T")
 E = TypeVar("E", bound=BaseException)
@@ -20,8 +20,8 @@ class Result(Generic[T, E], Variant):
     that can be captured and evaluated using match.
     """
 
-    ok: (T,)
-    error: (E,)
+    ok: (T,)  # type: ignore
+    error: (E,)  # type: ignore
 
     def apply(self, func: Callable[[T], U]) -> Result[U, E]:
         """Apply a function to the contained value.

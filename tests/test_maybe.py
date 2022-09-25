@@ -1,4 +1,5 @@
 import pytest
+
 from match_variant import Maybe
 
 

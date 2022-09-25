@@ -1,14 +1,13 @@
 import inspect
-from contextlib import suppress
 import types
-from typing import Any, Type, NoReturn
+from contextlib import suppress
+from typing import Any, NoReturn, Type
 
 
 class VariantMeta(type):
     """Placeholder for when we add metaclass features"""
+
     pass
-    # def __instancecheck__(cls, instance):
-    #     pass
 
 
 class Variant(metaclass=VariantMeta):

@@ -4,10 +4,10 @@ from match_variant import Variant
 
 
 class TestVariant(Variant):
-    option0: ()
-    option1: (str,)
-    option2: (str, int)
-    option_list: (list[str],)
+    option0: ()  # type: ignore
+    option1: (str,)  # type: ignore
+    option2: (str, int)  # type: ignore
+    option_list: (list[str],)  # type: ignore
 
 
 def test_too_many_args():

@@ -1,9 +1,9 @@
 import inspect
-from typing import Any
 from functools import lru_cache
+from typing import Any
 
-from .variant import Variant
-from .maybe import Maybe
+from ._maybe import Maybe
+from ._variant import Variant
 
 
 class Enum(Variant):

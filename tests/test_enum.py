@@ -1,11 +1,10 @@
-from match_variant.enum import Enum
-from match_variant.maybe import Maybe
+from match_variant import Enum, Maybe
 
 
 class MyEnum(Enum):
-    a: () = 1
-    b: () = 2
-    c: (int,)
+    a: () = 1  # type: ignore
+    b: () = 2  # type: ignore
+    c: (int,)  # type: ignore
 
 
 def test_from_value_exists():

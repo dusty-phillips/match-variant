@@ -1,7 +1,7 @@
-import math
 import random
 from functools import partial
-from match_variant.maybe import Maybe
+
+from match_variant._maybe import Maybe
 
 
 def get_a_maybe():

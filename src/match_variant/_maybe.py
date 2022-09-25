@@ -1,8 +1,9 @@
+# type: ignore
 from __future__ import annotations
-from typing import Generic, TypeVar, Callable, final
 
-from .variant import Variant
+from typing import Callable, Generic, TypeVar, final
 
+from ._variant import Variant
 
 T = TypeVar("T")
 U = TypeVar("U")
