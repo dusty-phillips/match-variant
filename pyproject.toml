@@ -17,3 +17,6 @@ Home = "https://github.com/dusty-phillips/match-variant"
 
 [project.optional-dependencies]
 test = ["pytest"]
+
+[tool.flit.module]
+name = "match_variant"
