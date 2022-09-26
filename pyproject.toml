@@ -7,6 +7,7 @@ name = "match-variant"
 version = "2022.10.0a1"
 authors = [{name = "Brett Cannon", email = "brett@python.org"}, {name = "Dusty Phillips", email="dusty@phillips.codes"}]
 license = {file = "LICENSE"}
+readme = "README.md"
 requires-python = ">=3.10"
 classifiers = ["License :: OSI Approved :: MIT License"]
 dynamic = ["description"]
