@@ -1,6 +1,7 @@
-import math, random
-from match_variant import trap, Result
+import math
+import random
 
+from match_variant import Result, trap
 
 with trap(ZeroDivisionError) as trapped:
     i = random.randint(0, 4)
