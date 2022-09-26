@@ -1,8 +1,8 @@
 # match-variant
 
-Variant algebraic datatypes that work with the Python 3.10 match statement.
+Variant algebraic datatypes that work with the Python 3.10 `match` statement.
 
-Python's match statement for pattern matching is a delightful innovation,
+Python's `match` statement for pattern matching is a delightful innovation,
 but it doesn't have the power of similar statements in functional progamming
 languages due to Python's lack of a Variant datatype. This package brings
 Variant types to the Python language.
@@ -13,7 +13,7 @@ types ("just a value or no value"), result types ("successful value or error
 value"), or authentication roles ("anonymous user or normal user or superuser").
 
 It may be helpful to think of variants as an Enum where each value can hold
-structured data and each type can have a different structure. 
+structured data and each type can have a different structure.
 
 ## Quick example
 
@@ -71,20 +71,21 @@ class Role(Variant):
 ### Case exhaustion
 
 Type checkers do not know about this code yet, but we are assuming
-they will special case `Variant`s the same way they do with `enum`
-in the standard library. Once this is implemented, you will be able to get typechecker errors when you miss a match arm using the `exhaust` method supplied with all `Variant`s:
-
+they will special-case `Variant`s the same way they do with `enum`
+from the standard library. To help them in the future to know that
+case exhaustion is desired, call the `exhaust` method in any `Variant`
+class:
 
 ```python
-# This "should" fail type checking because not all roles were tested
+# This "should" fail type checking because not all roles were tested.
 match user:
     case Role.anonymous():
         print("we only handled anonymous")
     case _:
         Role.exhaust(user)
 ```
-As well as failing static analysis, the `exhaust` method will
-throw an exception at runtime if it is hit.
+As well as failing static analysis (someday), the `exhaust` method will
+raise `ValueError` at runtime if it is called.
 
 ## `Variant` instances we ship
 
@@ -94,7 +95,7 @@ cases.
 
 ### The `Maybe` Type
 
-Null, or None in Python has been described as the billion dollar
+Null, or `None` in Python, has been described as the billion dollar
 mistake and current sentiment seems to be that it should be
 avoided in favour of optional types. Well, here's your optional
 type!
@@ -106,7 +107,7 @@ or issue) to transform or extract the value.
 
 #### Constructing `Maybe`
 
-Just use one of the two class constructors defined as fields
+Just use one of the two class constructors defined as attributes
 on the `Maybe` class:
 
 ```python
@@ -180,8 +181,8 @@ match maybe_value \
 
 ### The `Result` Type
 
-The `Result` type is similar to option, but allows an exception to
-be attached to the error type. A context manager is supplied to
+The `Result` type is similar to `Maybe`, but allows an exception to
+be attached to an error variant. A context manager is supplied to
 automatically convert exceptions to results.
 
 The benefit (and drawback) of `Result` is that it forces calling
@@ -200,6 +201,7 @@ with trap(ZeroDivisionError) as trapped:
     i = random.randint(0, 4)
     trapped.ok(1 / i)
 
+# Typically `trapped` would be returned in a function.
 print(trapped.result)
 ```
 
@@ -245,7 +247,7 @@ class HttpStatus(Enum):
     not_found: () = 404
 ```
 
-Enum provides a `from_value` class method to convert values to
+`Enum` provides a `from_value` class method to convert values to
 instances. Because not all possible values can return an instance,
 this function returns a `Maybe`. This works beautifully with the `match` statement's structured typing:
 
@@ -264,4 +266,4 @@ for value in (200, 404, 600):
 
 # Contributing
 
-PRs are more than welcome.
+[PRs](https://github.com/dusty-phillips/match-variant/pulls) are more than welcome.
