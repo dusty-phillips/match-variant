@@ -56,7 +56,7 @@ class Variant(metaclass=VariantMeta):
         return hash(tuple(getattr(self, arg) for arg in self.__match_args__))
 
     @classmethod
-    def exhaust(cls, value) -> NoReturn:
+    def exhaust(cls, value: NoReturn) -> NoReturn:
         """Instruct type checkers to check variant types exhaustively.
 
         Note, this relies on Typecheckers special casing Variant as they
@@ -70,6 +70,6 @@ class Variant(metaclass=VariantMeta):
             case Maybe.nothing:
                 print("nothing")
             case _ as x:
-                exhaust_match(x)
+                Maybe.exhaust(x)
         """
         raise ValueError(f"Unsupported match arm: {value}")
