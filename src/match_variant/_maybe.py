@@ -46,6 +46,32 @@ class Maybe(Generic[T], Variant):
             case Maybe.nothing():
                 return self
 
+    def filter(self, func: Callable[[T], bool]) -> Maybe[T]:
+        """Filter the contained value.
+
+        If this is a `Maybe.just` variant and the given function returns `True`, return a `Maybe.just` with the unmodified value.
+        Otherwise, return `Maybe.nothing`.
+
+        Example:
+
+        >>> from basicenum.maybe import Maybe
+        >>> Maybe.just("hello").filter(lambda x: len(x) > 3)
+        <Maybe.just: 'hello'>
+        >>>
+        >>> Maybe.just("abc").filter(lambda x: len(x) > 3)
+        <Maybe.nothing>
+        >>>
+        >>> Maybe.nothing().filter(lambda x: len(x) > 3)
+        <Maybe.nothing>
+        """
+        match self:
+            case Maybe.just(val):
+                if func(val):
+                    return self
+                return Maybe.nothing()
+            case Maybe.nothing():
+                return self
+
     def unwrap(self, *, default: T = _RAISE) -> T:
         """
         Access the value inside the Maybe.just.
@@ -79,3 +105,25 @@ class Maybe(Generic[T], Variant):
                         "Attempted to unwrap Maybe.nothing(); can only unwrap Maybe.just(val)"
                     )
                 return default
+
+    def __iter__(self) -> None:
+        """Iterate over the Maybe.
+
+        If this is a Maybe.just value, yield the value
+
+        If it is Maybe.nothing, do nothing.
+
+        Example:
+
+        >>> from basicenum.maybe import Maybe
+        >>> for val in Maybe.just("hello"): print(val)
+        hello
+        >>> for val in Maybe.nothing(): print(val)
+        >>>
+        """
+        match self:
+            case Maybe.just(val):
+                yield val
+            case Maybe.nothing():
+                pass
+
